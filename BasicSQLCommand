@@ -113,6 +113,5 @@ grant create view to student; //  권한 생성
 
 다시 student 계정
 
-create view jae num,name
 --뷰 생성--
 create view jae as select num, name, from cars;
