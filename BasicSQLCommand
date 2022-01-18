@@ -87,3 +87,32 @@ SQL> select * from numbers;
          9
          2
          5
+
+create table cars as select num from numbers;  --numbers 테이블에서 num 칼럼의 데이터를 가져와서 cars 테이블을 생성 --
+
+alter table cars add(name varchar2(20));  -- cars 테이블에 name 문자열 칼럼 추가--
+
+alter table cars add(address varchar2(50)); -- cars 테이블에 address 문자열 칼럼 추가--
+
+update cars set name='줄리' where num=10; -- num이 10인 데이터에게 줄리라는 이름 추가
+update cars set address='대구 동구 신암동 123번지' -- address 칼럼에 데이터를 대구 동구 신암동 123번지 전체 추가--
+
+       NUM NAME                      ADDRESS                                           
+---------- ------------------------- --------------------------------------------------
+        10 줄리                      대구 동구 신암동 123번지                          
+        23 이순신                    대구 동구 신암동 123번지                          
+         3 감찬                      대구 동구 신암동 123번지                          
+         3 감찬                      대구 동구 신암동 123번지    
+
+--뷰생성 권한설정--
+
+connect system/1234
+
+oracle에서는 초기 데이터베이스!
+grant create view to student; //  권한 생성
+
+다시 student 계정
+
+create view jae num,name
+--뷰 생성--
+create view jae as select num, name, from cars;
