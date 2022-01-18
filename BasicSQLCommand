@@ -1,0 +1,89 @@
+> sqlplus system/1234 //oracle 설치후 system(최고관리자)/1234(비밀번호) 접속
+
+SQL*Plus: Release 11.2.0.2.0 Production on 화 1월 18 10:18:36 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> select * from tab; // 연결되어있는지 확인
+
+SQL> create user student identified by 1234; //user 생성 과 비밀번호 설정
+
+SQL> quit //sql 종료
+
+>sqlplus system/1234 // user 권한주기 위해 다시 접속
+
+SQL> grant resource, connect to student; // student 권한 설정
+
+SQL> quit
+
+
+>sqlplus student/1234 // student로 다시 접속
+
+SQL*Plus: Release 11.2.0.2.0 Production on 화 1월 18 10:28:05 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+> select * from tab;
+
+no rows selected
+
+SQL> create table numbers(num number);
+
+Table created.
+
+SQL> select * from numbers;
+
+no rows selected
+
+SQL> select * from tab;
+
+TNAME                                                        TABTYPE
+------------------------------------------------------------ --------------
+ CLUSTERID
+----------
+NUMBERS                                                      TABLE
+
+SQL> insert into numbers (num) values (8); // 칼럼(행) 추가
+
+1 row created.
+
+
+SQL> select num from numbers order by num asc; // 추가된 칼럼의 데이터들 오름차순 정렬
+
+
+SQL> delete from numbers where num=3;  // num이라는 칼럼안에서 3이라는 데이터를 삭제
+
+1 row deleted.
+
+
+SQL> select num from numbers where num >4 order by num asc; // num칼럼에서 4 이상 오름차순 정렬
+
+       NUM
+----------
+         5
+         8
+         9
+        10
+        
+SQL> update numbers set num = 10 where num = 1; // update 수정. num칼럼에서 데이터 10을 1로 바꿈
+
+1 row updated.
+
+SQL> select * from numbers;
+
+       NUM
+----------
+         8
+        10
+        10
+         9
+         2
+         5
