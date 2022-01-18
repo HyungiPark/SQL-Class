@@ -1,0 +1,21 @@
+--쿼리문 정리--
+--사용자 계정 student 생성 및 권한 부여 후--
+create table numbers(num number);
+insert into numbers (num) values (10);
+insert into numbers (num) values (23);
+insert into numbers (num) values (3);
+insert into numbers (num) values (3);
+
+create table cars as select num from numbers;
+alter table cars add(name varchar2(20));
+alter table cars add(address varchar2(50));
+
+update cars set name='줄리' where num=10;
+update cars set name='이순신' where num=23;
+update cars set name='감찬' where name is null;
+update cars set address='대구 동구 신암동 123번지';
+
+connect system/1234
+grant create view to student;
+connect student/1234
+create view jae as select num, name, from cars;
