@@ -103,6 +103,38 @@ update cars set address='대구 동구 신암동 123번지' -- address 칼럼에
         23 이순신                    대구 동구 신암동 123번지                          
          3 감찬                      대구 동구 신암동 123번지                          
          3 감찬                      대구 동구 신암동 123번지    
+         
+--PK 설정--
+CREATE TABLE STUDENT(
+    ST_NO NUMBER CONSTRAINT PK_ST_NO PRIMARY KEY, --  PK_ST_NO : Primary Key ID 지정
+    ST_NAME VARCHAR2(20),
+    CLASS VARCHAR2(20)
+);
+
+CREATE TABLE STUDENT(
+    ST_NO NUMBER,
+    ST_NAME VARCHAR2(20),
+    CLASS VARCHAR2(20),
+    GRADE VARCHAR2(10),
+    CONSTRAINT PK_ST_INFO PRIMARY KEY(ST_NO, GRADE)
+);
+         
+ALTER TABLE STUDENT 
+ADD PRIMARY KEY (ST_NO);
+
+
+ALTER TABLE STUDENT
+ADD CONSTRAINT PK_ST_NO
+PRIMARY KEY(ST_NO);  
+--FK 설정--
+CREATE TABLE SCHOOL(
+    ST_NO NUMBER,
+    TEACHER VARCHAR2(20),
+    -- 외래키의 크기는 대상테이블의 기본키(OR 고유키)보다 크기가 같거나 커야 한다.
+    CONSTRAINT FK_ST_NO FOREIGN KEY(ST_NO)
+        REFERENCES STUDENT(ST_NO) -- 기본키와 외래키의 컬럼명이 달라도 된다.
+);
+
 
 --뷰생성 권한설정--
 
